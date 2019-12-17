@@ -13,7 +13,7 @@ theta = np.pi/4
 qRe = n * np.sin(theta/2)           #旋转四元数实部
 qIm = np.cos(theta/2)               #旋转四元数虚部
 q = Q(np.append(qRe, qIm))
-p = Q(np.append(pc, 0))              #初始坐标四元数
+p = Q(np.append(pc, 0))             #初始坐标四元数
 result = q.rotate(p)                #旋转坐标四元数
 result = np.array([result.x, result.y, result.z])
 print(result,'is rotated',180*theta/np.pi,'degree around',n,'by',pc)
