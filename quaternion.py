@@ -1,10 +1,19 @@
 class Quaternion:
     def __init__(self, array):
+        if len(array) == 4:
+            self.z = array[2]
+            self.w = array[3]
+        elif len(array) == 3:
+            self.z = array[2]
+            self.w = 0
+        elif len(array) == 2:
+            self.z = 0
+            self.w = 0
+        else:
+            raise ValueError('Unsupported array length.\n')
         self.x = array[0]
         self.y = array[1]
-        self.z = array[2]
-        self.w = array[3]
-        self.array = array
+        self.array = [self.x, self.y, self.z, self.w]
     def toArray(self):
         return [self.x, self.y, self.z, self.w]
     def add(self, quaternion):
