@@ -1,3 +1,5 @@
+from math import sqrt, sin, cos, pi
+
 class Quaternion:
     def __init__(self, array):
         if len(array) == 4:
@@ -69,3 +71,20 @@ class Quaternion:
     def __str__(self):
         return str(self.x) + "i " + str(self.y) + "j " + \
                str(self.z) + "k " + str(self.w)
+
+def qr_motion(p, shift, theta, axis):
+    r = [0, 0, sin(theta/2), cos(theta/2)]    #旋转四元数
+    p = [p[0]-axis[0], p[1]-axis[1]]
+    rq = Quaternion(r)
+    pq = Quaternion(p)                        #初始坐标四元数
+    result = rq.rotate(pq)                    #旋转坐标四元数
+    result = [result.x+axis[0]+shift[0], result.y+axis[1]+shift[1]]
+    return result
+
+if __name__ == '__main__':
+    p = [sqrt(2), sqrt(2)]                  #初始坐标
+    shift = [0, 0]                          #平移量
+    theta = pi/4                            #旋转角度，逆时针为正方向
+    axis = [0, 0]
+    result = qr_motion(p, shift, theta, axis)       
+    print(result[:2],'is rotated',180*theta/pi,'degree by',p)
